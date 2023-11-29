@@ -42,17 +42,16 @@ public class GameController : MonoBehaviour
             btn[0].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
     }
-    public void Choose(int value)
+    int choose = 0;
+    public void Choose()
     {
-        //Debug.Log(value);
-        if(value == questions[n].key)
+        if (choose == questions[n].key)
         {
             n++;
-            if(n == questions.Length)
+            if (n == questions.Length)
             {
                 audioController.PlaySound(3);
-                btn[0].transform.GetChild(0).gameObject.SetActive(false);
-                btn[0].transform.GetChild(1).gameObject.SetActive(false);
+                txtQuestion.transform.parent.gameObject.SetActive(false);
                 btn[1].gameObject.SetActive(false);
                 btn[2].gameObject.SetActive(false);
                 panel.GetComponent<Image>().sprite = sprites[n];
@@ -70,7 +69,18 @@ public class GameController : MonoBehaviour
             n = 0;
             Invoke("NewQuestion", 2);
         }
-        //Debug.Log(n);
+    }
+    public void Choose(int value)
+    {
+        choose = value;
+        if(questions[n].key == 0)
+        {
+            GetComponent<Animator>().SetTrigger("L");
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("R");
+        }
     }
     public void Click()
     {

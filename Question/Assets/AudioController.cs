@@ -20,8 +20,6 @@ public class AudioController : MonoBehaviour
 
     void Play(AudioClip clip, ref AudioSource audioSource, float volume = 1f, bool isLoopback = false, bool repeat = false)
     {
-        if (audioSource != null && !repeat)
-            return;
         audioSource = Instantiate(instance.prefab).GetComponent<AudioSource>();
         audioSource.volume = volume;
         audioSource.loop = isLoopback;
